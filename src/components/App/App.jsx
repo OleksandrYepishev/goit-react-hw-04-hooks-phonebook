@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import initialContacts from '../../data/contacts.json';
+import useDebounce from '../../Hooks/debounce-hook';
 
 import { Form } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
@@ -60,11 +61,13 @@ export const App = () => {
     setFilter(e.currentTarget.value);
   };
 
+  const debouncedFilter = useDebounce(filter, 500);
+
   const getFilteredContacts = useMemo(() => {
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()),
+      contact.name.toLowerCase().includes(debouncedFilter.toLowerCase()),
     );
-  }, [contacts, filter]);
+  }, [contacts, debouncedFilter]);
 
   return (
     <Container>
