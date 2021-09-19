@@ -12,17 +12,21 @@ export const ContactForm = styled.form`
 
 export const Label = styled.label`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
   margin-bottom: 30px;
   font-size: 20px;
 `;
 
 export const Input = styled.input`
-  display: blcok;
+  display: inline-blcok;
   height: 25px;
   margin-top: 15px;
   min-width: 300px;
-  margin-right: auto;
+  margin-right: 80px;
+  margin-left: auto;
 `;
 
 export const Button = styled.button`

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { ImUsers, ImProfile, ImPhone } from 'react-icons/im';
 
 import { ContactForm, Label, Input, Button } from './ContactForm.styled';
 
@@ -41,6 +42,7 @@ export const Form = ({ onSubmit }) => {
     <ContactForm onSubmit={handleSubmit}>
       <Label htmlFor={nameInputId}>
         Name
+        <ImProfile style={{ marginLeft: 15 }} />
         <Input
           type="text"
           name="name"
@@ -54,6 +56,7 @@ export const Form = ({ onSubmit }) => {
       </Label>
       <Label htmlFor={numberInputId}>
         Number
+        <ImPhone style={{ marginLeft: 15 }} />
         <Input
           type="tel"
           name="number"
@@ -66,7 +69,10 @@ export const Form = ({ onSubmit }) => {
         />
       </Label>
 
-      <Button type="submit">Add contact</Button>
+      <Button type="submit">
+        <ImUsers style={{ marginRight: 10 }} />
+        Add contact
+      </Button>
     </ContactForm>
   );
 };
