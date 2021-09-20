@@ -14,25 +14,26 @@ import { Title } from './App.styled';
 export const App = () => {
   const [contacts, setContacts] = useState(initialContacts);
   const [filter, setFilter] = useState('');
-  const isFirtRender = useRef(true);
+  const isFirstRender = useRef(true);
+  const localStorageKeyNane = 'contacts';
 
   useEffect(() => {
-    const localContacts = localStorage.getItem('contacts');
+    const localContacts = localStorage.getItem(localStorageKeyNane);
     const parsedContacts = JSON.parse(localContacts);
 
     parsedContacts && setContacts(parsedContacts);
   }, []);
 
   useEffect(() => {
-    if (isFirtRender.current) {
-      isFirtRender.current = false;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
       return;
     }
 
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    localStorage.setItem(localStorageKeyNane, JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = (name, number) => {
+  const addContact = ({ name, number }) => {
     const newContact = {
       id: uuidv4(),
       name,
@@ -52,8 +53,8 @@ export const App = () => {
   };
 
   const deleteContact = contactId => {
-    return setContacts(prevContacs =>
-      prevContacs.filter(contact => contact.id !== contactId),
+    return setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId),
     );
   };
 
